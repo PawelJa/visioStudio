@@ -17,9 +17,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -71,12 +69,19 @@ public class HelloWorldController {
         return "redirect:/login?logout";
     }
 
+    @PostMapping("/admin")
+    @ResponseBody
+    public String reg() {
+        return "gti";
+    }
+
     @RequestMapping(value = "/newUser", method = RequestMethod.GET)
     public String newRegistration(ModelMap model) {
         User user = new User();
         model.addAttribute("user", user);
         return "newuser";
     }
+
 
     @RequestMapping(value="/newUser", method = RequestMethod.POST)
     public String saveRegistration(@Valid User user, BindingResult result, ModelMap model) {
